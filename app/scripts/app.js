@@ -115,7 +115,10 @@ angular
               name:'chart.js',
               files:[
                 'bower_components/angular-chart.js/dist/angular-chart.min.js',
-                'bower_components/angular-chart.js/dist/angular-chart.css'
+                'bower_components/angular-chart.js/dist/angular-chart.css',
+                'code/highcharts.js',
+                'code/modules/exporting.js',
+                'scripts/directives/chart/chartline.js'
               ]
             }),
             $ocLazyLoad.load({

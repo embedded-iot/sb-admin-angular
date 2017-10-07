@@ -79,7 +79,9 @@ module.exports = function (grunt) {
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
-                connect.static('./bower_components')
+                '/code',
+                connect.static('./bower_components'),
+                connect.static('./code')
               ),
               connect.static(appConfig.app)
             ];
@@ -95,7 +97,9 @@ module.exports = function (grunt) {
               connect.static('test'),
               connect().use(
                 '/bower_components',
-                connect.static('./bower_components')
+                '/code',
+                connect.static('./bower_components'),
+                connect.static('./code')
               ),
               connect.static(appConfig.app)
             ];
@@ -314,6 +318,11 @@ module.exports = function (grunt) {
           src: [ '**']
         },{
 
+          expand:true,
+          cwd:'code',
+          dest:'<%= yeoman.dist %>/code',
+          src:['**']
+        } ,{
           expand:true,
           cwd:'bower_components',
           dest:'<%= yeoman.dist %>/bower_components',
