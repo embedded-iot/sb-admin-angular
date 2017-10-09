@@ -130,7 +130,23 @@ angular
     })
       .state('dashboard.table',{
         templateUrl:'views/table.html',
-        url:'/table'
+        url:'/table',
+        // controller:'ngtableCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              // name:'chart.js',
+              files:[
+                'code/table/ng-table.css',
+                'code/table/ng-table.js'
+              ]
+            }),
+            $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:['scripts/controllers/tableController.js'] 
+            })
+          }
+        }
     })
       .state('dashboard.panels-wells',{
           templateUrl:'views/ui-elements/panels-wells.html',
