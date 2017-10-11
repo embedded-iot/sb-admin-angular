@@ -21,7 +21,7 @@ angular
       events:true,
     });
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/dashboard/home');
 
     $stateProvider
       .state('dashboard', {
@@ -36,7 +36,8 @@ angular
                     'scripts/directives/header/header.js',
                     'scripts/directives/header/header-notification/header-notification.js',
                     'scripts/directives/sidebar/sidebar.js',
-                    'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
+                    'scripts/directives/sidebar/sidebar-search/sidebar-search.js',
+                    'scripts/services/shareData.js'
                     ]
                 }),
                 $ocLazyLoad.load(
@@ -88,6 +89,40 @@ angular
               'scripts/directives/notifications/notifications.js',
               'scripts/directives/chat/chat.js',
               'scripts/directives/dashboard/stats/stats.js'
+              ]
+            })
+          }
+        }
+      })
+      .state('dashboard.downloadDay',{
+        url:'/downloadDay',
+        controller: 'downloadDayCtrl',
+        templateUrl:'views/pages/downloadDay.html',
+        params: {year: null, month: null},
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+              'scripts/controllers/downloadDay.js',
+              'scripts/services/shareData.js'
+              ]
+            })
+          }
+        }
+      })
+      .state('dashboard.downloadMonth',{
+        url:'/download',
+        controller: 'downloadMonthCtrl',
+        templateUrl:'views/pages/downloadMonth.html',
+        params: {year: null},
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+              'scripts/services/shareData.js',
+              'scripts/controllers/downloadMonth.js'
               ]
             })
           }

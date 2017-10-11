@@ -14,7 +14,7 @@
                 <a ui-sref="dashboard.table"><i class="fa fa-table fa-fw"></i> Tables</a>
             </li>
         
-            <li ng-class="{active: collapseVar==1}">{{dropDown}}
+            <!-- <li ng-class="{active: collapseVar==1}">{{dropDown}}
                 <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> UI Elements<span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=1">
@@ -37,41 +37,30 @@
                         <a ui-sref="dashboard.grid">Grid</a>
                     </li>
                 </ul>
-                <!-- /.nav-second-level -->
-            </li>
+            </li> -->
             <li ng-class="{active: collapseVar==2}">
-                <a href="" ng-click="check(2)"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span
+                <a href="" ng-click="check(2)"><i class="fa fa-sitemap fa-fw"></i> Download<span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=2">
-                    <li>
+                    <!-- <li>
                         <a href="">Second Level Item</a>
                     </li>
                     <li>
                         <a href="">Second Level Item</a>
-                    </li>
+                    </li> -->
                     <li ng-init="third=!third" ng-class="{active: multiCollapseVar==3}">
-                        <a href="" ng-click="multiCheck(3)">Third Level <span class="fa arrow"></span></a>
+                        <a  ng-click="multiCheck(3)">Year 2017 <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level" collapse="multiCollapseVar!=3">
-                            <li>
-                                <a href="">Third Level Item</a>
+                            <li ui-sref-active="active" ng-repeat="month in Months">
+                                <a ng-click="selectedMonth($index)">{{month.name}}</a>
                             </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-
                         </ul>
                         <!-- /.nav-third-level -->
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li ng-class="{active:collapseVar==4}">
+            <!-- <li ng-class="{active:collapseVar==4}">
                 <a href="" ng-click="check(4)"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=4">
@@ -82,9 +71,8 @@
                         <a ui-sref="login">Login Page</a>
                     </li>
                 </ul>
-                <!-- /.nav-second-level -->
             </li>
-            <li><a href="http://www.strapui.com/">Premium Angular Themes</a></li>
+            <li><a href="http://www.strapui.com/">Premium Angular Themes</a></li> -->
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

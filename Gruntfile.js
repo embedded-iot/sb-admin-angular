@@ -322,7 +322,7 @@ module.exports = function (grunt) {
           cwd:'code',
           dest:'<%= yeoman.dist %>/code',
           src:['**']
-        } ,{
+        },{
           expand:true,
           cwd:'bower_components',
           dest:'<%= yeoman.dist %>/bower_components',
