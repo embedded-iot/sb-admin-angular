@@ -31,4 +31,5 @@ angular.module('sbAdminApp',["ngTable"])
       {Date: "12-10-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 }
     ];
     self.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data});
+    self.oDate2 = new Date();
 }]);

@@ -12,7 +12,7 @@ angular
     'oc.lazyLoad',
     'ui.router',
     'ui.bootstrap',
-    'angular-loading-bar',
+    'angular-loading-bar'
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
@@ -153,7 +153,10 @@ angular
                 'bower_components/angular-chart.js/dist/angular-chart.css',
                 'code/highcharts.js',
                 'code/modules/exporting.js',
+                'scripts/directives/datetime/rm-datepicker.js',
                 'scripts/directives/chart/chartline.js'
+                // 'scripts/directives/chart/chartline.js',
+
               ]
             }),
             $ocLazyLoad.load({
@@ -173,7 +176,8 @@ angular
               // name:'chart.js',
               files:[
                 'code/table/ng-table.css',
-                'code/table/ng-table.js'
+                'code/table/ng-table.js',
+                'scripts/directives/datetime/rm-datepicker.js'
               ]
             }),
             $ocLazyLoad.load({
