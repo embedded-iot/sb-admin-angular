@@ -7,21 +7,55 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp',["ngTable"])
-  .controller('ngTableCtrl', ['$scope', 'NgTableParams','$window', 'httpService', function ($scope, NgTableParams, $window, httpService) {
+  .controller('ngTableCtrl', ['$scope', 'NgTableParams','$window', 'httpService', '$state', function ($scope, NgTableParams, $window, httpService, $state) {
     $scope.UseName = $window.localStorage['UseName'];
     $scope.code = $window.localStorage['code'];
     console.log('Year: '+ $scope.UseName);
     console.log('Month: '+$scope.code);
 
 
+
     var vm = this;
     var dateNow = new Date();
     vm.data = [];
     vm.oDate2 = dateNow;
+
+    //$window.lolStorage.setItem("getDate",dateNow) ;ca
+
+    // vm.getDate = localStorage['getDate'];
+    if ($window.localStorage["getDate"] === null){
+      vm.SelectDate = new Date();
+    }
+    else {
+      vm.SelectDate= new Date(Date.parse($window.localStorage.getItem("getDate")));
+    }
+
+    console.log(vm.SelectDate);
+    var data = [
+      // {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-10-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-10-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-10-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
+      // {Date: "12-10-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 }
+    ];
     var getDateNow = function () {
-      $scope.year = vm.oDate2.getFullYear();
-      $scope.month = vm.oDate2.getMonth()+1;
-      $scope.day = vm.oDate2.getDate();
+      $scope.year = vm.SelectDate.getFullYear();
+      $scope.month = vm.SelectDate.getMonth()+1;
+      $scope.day = vm.SelectDate.getDate();
     };
 
 
@@ -37,11 +71,13 @@ angular.module('sbAdminApp',["ngTable"])
       };
       httpService.getData(params).then(function (items) {
         if (items.length > 0){
-          vm.data = [];
-          angular.copy(items, vm.data);
-          console.log('Lenght = '+vm.data.length);
-          console.log(vm.data);
-          vm.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: vm.data});
+          data = [];
+          angular.copy(items, data);
+          // console.log('Lenght = '+vm.data.length);
+          // console.log(vm.data);
+          // vm.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: vm.data});
+          vm.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data});
+          console.log(data);
         }
         // console.log(data);
         // if (items.length > 0) {
@@ -59,35 +95,15 @@ angular.module('sbAdminApp',["ngTable"])
 
     vm.onGetDataTable = function () {
       console.log('onGetDataTable');
-      getDateNow();
-      getDataAPI();
+      // getDateNow();
+      // getDataAPI();
+      $window.localStorage.setItem("getDate",vm.SelectDate) ;
+      // $state.go('dashboard.table');
+      $state.reload();
     };
 
     getDateNow();
     getDataAPI();
-
-    vm.data1 = [
-      {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-08-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-09-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-10-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-10-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-10-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 },
-      {Date: "12-10-2017", Time: "02-05-40", Temperature: 20.15 , Radiant: 30.15 }
-    ];
-
 
 
 }]);

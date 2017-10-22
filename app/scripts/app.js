@@ -186,6 +186,7 @@ angular
         templateUrl:'views/table.html',
         url:'/table',
         // controller:'ngtableCtrl',
+        params: {getDate: null},
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
