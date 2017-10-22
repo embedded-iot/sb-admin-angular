@@ -21,7 +21,7 @@ angular
       events:true,
     });
 
-    $urlRouterProvider.otherwise('/dashboard/home');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
       .state('dashboard', {
@@ -33,11 +33,12 @@ angular
                 {
                     name:'sbAdminApp',
                     files:[
-                    'scripts/directives/header/header.js',
-                    'scripts/directives/header/header-notification/header-notification.js',
-                    'scripts/directives/sidebar/sidebar.js',
-                    'scripts/directives/sidebar/sidebar-search/sidebar-search.js',
-                    'scripts/services/shareData.js'
+                      'scripts/services/shareData.js',
+                      'scripts/services/httpService.js',
+                      'scripts/directives/header/header.js',
+                      'scripts/directives/header/header-notification/header-notification.js',
+                      'scripts/directives/sidebar/sidebar.js',
+                      'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
                     ]
                 }),
                 $ocLazyLoad.load(
@@ -104,8 +105,9 @@ angular
             return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
-              'scripts/controllers/downloadDay.js',
-              'scripts/services/shareData.js'
+                'scripts/services/httpService.js',
+                'scripts/services/shareData.js',
+                'scripts/controllers/downloadDay.js'
               ]
             })
           }
@@ -122,6 +124,7 @@ angular
               name:'sbAdminApp',
               files:[
               'scripts/services/shareData.js',
+              'scripts/services/httpService.js',
               'scripts/controllers/downloadMonth.js'
               ]
             })
@@ -137,8 +140,21 @@ angular
         url:'/blank'
     })
       .state('login',{
+        url:'/login',
+        controller:'LoginCtrl',
         templateUrl:'views/pages/login.html',
-        url:'/login'
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'scripts/services/httpService.js',
+                'scripts/services/shareData.js',
+                'scripts/controllers/loginController.js'
+              ]
+            })
+          }
+        }
     })
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',
@@ -173,16 +189,18 @@ angular
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
-              // name:'chart.js',
+              name:'sbAdminApp',
               files:[
+                'scripts/directives/datetime/rm-datepicker.js',
                 'code/table/ng-table.css',
                 'code/table/ng-table.js',
-                'scripts/directives/datetime/rm-datepicker.js'
+                'scripts/services/httpService.js',
+                'scripts/services/shareData.js'
               ]
             }),
             $ocLazyLoad.load({
               name:'sbAdminApp',
-              files:['scripts/controllers/tableController.js'] 
+              files:[ 'scripts/controllers/tableController.js']
             })
           }
         }

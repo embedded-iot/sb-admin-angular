@@ -6,10 +6,11 @@
  * Released under the MIT license
  * https://github.com/RUBYMAGE/angular-datepicker/blob/master/LICENSE
  */
+'use strict';
+angular
+    .module('sbAdminApp', [])
 
-    var Module = angular.module('sbAdminApp', []);
-
-    Module.constant('rmDatepickerConfig', {
+    .constant('rmDatepickerConfig', {
         mondayStart: false,
         textToday: "Today",
 
@@ -23,10 +24,10 @@
 
         min: null,
         max: null,
-        format: "yyyy-MM-dd"
-    });
+        format: "dd-MM-yyyy"
+    })
 
-    Module.directive("rmDatepicker", ['rmDatepickerConfig', '$compile', '$filter', '$document', '$timeout',
+    .directive("rmDatepicker", ['rmDatepickerConfig', '$compile', '$filter', '$document', '$timeout',
                             function (rmDatepickerConfig, $compile, $filter, $document, $timeout) {
 
         var link = function (scope, element, attrs, ngModel) {
@@ -339,7 +340,7 @@
             else {
                 element.append($compile(TEMPLATE)(scope));
             }
-        };
+        }
 
         //TODO: template may need optimization :)
         var TEMPLATE =
@@ -389,9 +390,9 @@
             },
             link: link
         }
-    }]);
+    }])
 
-    Module.directive('rmInclude', ['$compile', function ($compile) {
+    .directive('rmInclude', ['$compile', function ($compile) {
 
         var link = function (scope, element, attrs) {
             scope.$watch(

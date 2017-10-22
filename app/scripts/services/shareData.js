@@ -8,7 +8,10 @@
  */
 
 angular.module('sbAdminApp')
-  .factory('shareData',function() {
+    .factory('shareData',function() {
+
+    var UseName = '';
+    var code = '';
     var year= 0;
     var monthsOfYear = [
       {id : '01' , name : 'January'},
@@ -24,7 +27,27 @@ angular.module('sbAdminApp')
       {id : '11' , name : 'November'},
       {id : '12' , name : 'December'}
     ];
+    var getUseName = function () {
+      console.log(UseName);
+      return UseName;
+    };
+    var setUseName = function (useName) {
+      console.log('setUseName' + useName);
+      UseName = useName;
+    };
+    var getcode = function () {
+      console.log(code);
+      return code;
+    };
+    var setcode = function (codeDevice) {
+      console.log('setcode' + codeDevice);
+      code = codeDevice;
+    };
     var obj = {
+      getUseName : getUseName,
+      setUseName : setUseName,
+      getcode : getcode,
+      setcode : setcode,
       year : year,
       monthsOfYear: monthsOfYear
     };

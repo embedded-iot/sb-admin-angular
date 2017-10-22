@@ -48,11 +48,11 @@
                     <li>
                         <a href="">Second Level Item</a>
                     </li> -->
-                    <li ng-init="third=!third" ng-class="{active: multiCollapseVar==3}">
-                        <a  ng-click="multiCheck(3)">Year 2017 <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level" collapse="multiCollapseVar!=3">
-                            <li ui-sref-active="active" ng-repeat="month in Months">
-                                <a ng-click="selectedMonth($index)">{{month.name}}</a>
+                    <li ng-repeat="year in listYear" ng-init="third=!third" ng-class="{active: multiCollapseVar==3}">
+                        <a  ng-click="multiCheck(3 , $index)">{{year}}<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level" collapse="multiCollapseVar!=3" ng-init="indexYear = $index">
+                            <li ui-sref-active="active" ng-repeat="month in listMonth[$index].months">
+                                <a ng-click="selectedMonth(indexYear,$index)">{{month}}</a>
                             </li>
                         </ul>
                         <!-- /.nav-third-level -->

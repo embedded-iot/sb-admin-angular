@@ -7,11 +7,35 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-  .controller('downloadMonthCtrl',['$scope','$state','shareData', function($scope,$state,shareData) {
-    $scope.monthsOfYear = shareData.monthsOfYear;
-    $scope.year =  $state.params.year;
-    console.log(shareData.monthsOfYear[0].name);
-    console.log('Year: '+ $state.params.year);
+  .controller('downloadMonthCtrl',['$scope', '$state', 'shareData', 'httpService', '$window', function($scope, $state, shareData, httpService, $window) {
+
+    $scope.UseName = $window.localStorage['UseName'];
+    $scope.code = $window.localStorage['code'];
+    $scope.selectedYear = $state.params.year;
+    console.log('Year: '+ $scope.selectedYear);
+
+    $scope.listMonthOfYear = [];
+    var getListYear = function () {
+      //http://127.0.0.1/projects/PHP/demo3/index.php?UseName=QUAN&code=1234567890&action=getYearOfUser
+      var params = {
+        UseName : $scope.UseName,
+        code : $scope.code,
+        Year : $scope.selectedYear,
+        action : 'getMonthOfYear'
+      };
+      httpService.getData(params).then(function (items) {
+        //angular.copy(items, $scope.listMonthOfYear);
+        if (items.length > 0) {
+          for (var index =0 ; index < items.length ; index ++){
+            $scope.listMonthOfYear.push({name: items[index] , flagHover: false})
+          }
+        }
+      }, function (status) {
+        console.log(status);
+      });
+    };
+    getListYear();
+
     $scope.months = [
       {index: 0, flagHover : false},
       {index: 1, flagHover : false},
@@ -27,14 +51,14 @@ angular.module('sbAdminApp')
     ];
 
     $scope.inHover = function (index){
-      $scope.months[index].flagHover = true;
+      $scope.listMonthOfYear[index].flagHover = true;
       // console.log('in '+index);
     }
     $scope.outHover = function (index){
-      $scope.months[index].flagHover = false;
+      $scope.listMonthOfYear[index].flagHover = false;
       // console.log('out '+index);
     }
-    $scope.selectedMonth = function ($index){
-      $state.go('dashboard.downloadDay', { year : 2017 , month : $index})
+    $scope.selectedMonth = function (index){
+      $state.go('dashboard.downloadDay', { year : $scope.selectedYear , month : $scope.listMonthOfYear[index].name})
     }
 }]);
