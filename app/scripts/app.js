@@ -33,12 +33,13 @@ angular
                 {
                     name:'sbAdminApp',
                     files:[
-                      'scripts/services/shareData.js',
                       'scripts/services/httpService.js',
                       'scripts/directives/header/header.js',
                       'scripts/directives/header/header-notification/header-notification.js',
                       'scripts/directives/sidebar/sidebar.js',
-                      'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
+                      'scripts/directives/sidebar/sidebar-search/sidebar-search.js',
+                      'scripts/directives/dashboard/stats/stats.js'
+
                     ]
                 }),
                 $ocLazyLoad.load(
@@ -77,20 +78,33 @@ angular
         }
     })
       .state('dashboard.home',{
-        url:'/home',
-        controller: 'MainCtrl',
+        //controller: 'MainCtrl',
         templateUrl:'views/dashboard/home.html',
+        url:'/home',
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
-              'scripts/controllers/main.js',
-              'scripts/directives/timeline/timeline.js',
-              'scripts/directives/notifications/notifications.js',
-              'scripts/directives/chat/chat.js',
-              'scripts/directives/dashboard/stats/stats.js'
+                'scripts/services/httpService.js',
+                'scripts/directives/timeline/timeline.js',
+                'scripts/directives/notifications/notifications.js',
+                'scripts/directives/chat/chat.js',
+
+                // 'scripts/directives/dashboard/stats/stats.js',
+                // 'scripts/controllers/main.js'
+                'code/table/ng-table.css',
+                'code/table/ng-table.js',
+                'scripts/directives/chart/chartline.js',
+                'bower_components/angular-chart.js/dist/angular-chart.min.js',
+                'bower_components/angular-chart.js/dist/angular-chart.css',
+                'code/highcharts.js',
+                'code/modules/exporting.js',
               ]
+            }),
+            $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:['scripts/controllers/main.js']
             })
           }
         }
@@ -159,18 +173,20 @@ angular
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',
         url:'/chart',
-        controller:'ChartCtrl',
+        //controller:'ChartCtrl',
         resolve: {
           loadMyFile:function($ocLazyLoad) {
             return $ocLazyLoad.load({
-              name:'chart.js',
+              name:'sbAdminApp',
               files:[
+                'scripts/directives/chart/chartline.js',
+                'scripts/directives/datetime/rm-datepicker.js',
                 'bower_components/angular-chart.js/dist/angular-chart.min.js',
                 'bower_components/angular-chart.js/dist/angular-chart.css',
                 'code/highcharts.js',
                 'code/modules/exporting.js',
-                'scripts/directives/datetime/rm-datepicker.js',
-                'scripts/directives/chart/chartline.js'
+                'scripts/services/httpService.js',
+                'scripts/services/shareData.js'
                 // 'scripts/directives/chart/chartline.js',
 
               ]

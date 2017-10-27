@@ -23,8 +23,9 @@ angular.module('sbAdminApp',["ngTable"])
     //$window.lolStorage.setItem("getDate",dateNow) ;ca
 
     // vm.getDate = localStorage['getDate'];
-    if ($window.localStorage["getDate"] === null){
+    if ($window.localStorage["getDate"] === undefined){
       vm.SelectDate = new Date();
+
     }
     else {
       vm.SelectDate= new Date(Date.parse($window.localStorage.getItem("getDate")));
@@ -65,8 +66,8 @@ angular.module('sbAdminApp',["ngTable"])
         UseName : $scope.UseName,
         code : $scope.code,
         Year : $scope.year ,
-        Month : ($scope.month < 10 ? '0'.$scope.month : $scope.month),
-        Day : ($scope.day < 10 ? '0'.$scope.day : $scope.day),
+        Month : ($scope.month < 10 ? ('0'+$scope.month) : $scope.month),
+        Day : ($scope.day < 10 ? ('0'+$scope.day) : $scope.day),
         action : 'getDataOfFile'
       };
       httpService.getData(params).then(function (items) {
@@ -76,8 +77,7 @@ angular.module('sbAdminApp',["ngTable"])
           // console.log('Lenght = '+vm.data.length);
           // console.log(vm.data);
           // vm.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: vm.data});
-          vm.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data});
-          console.log(data);
+
         }
         // console.log(data);
         // if (items.length > 0) {
@@ -88,6 +88,8 @@ angular.module('sbAdminApp',["ngTable"])
         // var temp = [];
         // temp = angular.fromJson(items);
         // console.log(temp);
+        vm.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data});
+        console.log(data);
       }, function (status) {
         console.log(status);
       });
@@ -97,8 +99,8 @@ angular.module('sbAdminApp',["ngTable"])
       console.log('onGetDataTable');
       // getDateNow();
       // getDataAPI();
-      $window.localStorage.setItem("getDate",vm.SelectDate) ;
       // $state.go('dashboard.table');
+      $window.localStorage.setItem("getDate",vm.SelectDate) ;
       $state.reload();
     };
 

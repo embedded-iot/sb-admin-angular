@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-controller="ChartCtrl as vm1">
     <div class="col-lg-12 page-header-wrapper">
         <h1 class="col-lg-8 page-header">Charts</h1>
         <!--<div class="datetime-wrapper">-->
@@ -6,9 +6,9 @@
 
         <!--</div>-->
         <div class="col-lg-4 input-group custom-search-form">
-            <input ng-model="oDate2" rm-datepicker type="text" class="form-control" placeholder="Search...">
+            <input ng-model="vm1.SelectDate" rm-datepicker type="text" class="form-control" placeholder="Search...">
             <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
+            <button class="btn btn-default" type="button" ng-click="vm1.onGetDataTable()">
                 <i class="fa fa-search"></i>
                 Search
             </button>
@@ -18,7 +18,7 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
-<div class="row">
+<div class="row" ng-controller="ChartCtrl as vm">
     <!-- <div class="col-lg-6 col-sm-12" id="line-chart" ng-controller="ChartCtrl">
         <div class="panel panel-default">
             <div class="panel-heading">Line Chart</div>
@@ -29,6 +29,7 @@
         </div>
     </div> -->
     <div class="col-lg-12" >
-        <hc-chart options="chartOptions" style="min-width: 310px; height: 400px; margin: 0 auto"></hc-chart>
+        <!--<hc-chart options="vm.chartOptions" style="min-width: 310px; height: 400px; margin: 0 auto"></hc-chart>-->
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
 </div>
