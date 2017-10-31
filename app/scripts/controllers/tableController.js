@@ -88,7 +88,8 @@ angular.module('sbAdminApp',["ngTable"])
         // var temp = [];
         // temp = angular.fromJson(items);
         // console.log(temp);
-        vm.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data});
+        vm.tableParams = new NgTableParams({ count: 5}, { counts: [12, 25, 50], dataset: data});
+        vm.isNoData = data.length;
         console.log(data);
       }, function (status) {
         console.log(status);

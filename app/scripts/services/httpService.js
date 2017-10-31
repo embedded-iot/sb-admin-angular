@@ -27,7 +27,7 @@ angular.module('sbAdminApp')
         $http(
           {
             method: "GET",
-            url: "http://127.0.0.1/projects/PHP/demo3/index.php",
+            url: URL_SERVER,
             params : params,
             headers : {
               'Access-Control-Allow-Origin': '*'
@@ -39,6 +39,11 @@ angular.module('sbAdminApp')
           deferred.reject(status);
         });
         return deferred.promise;
+      },
+      newTabBrowser: function (params) {
+        var url = URL_SERVER + params;
+        window.open(url, "_blank");
       }
+
     }
   });

@@ -28,8 +28,13 @@ angular.module('sbAdminApp')
   vm.data = [];
   vm.oDate2 = dateNow;
 
+  if ($window.localStorage["getDateChart"] === undefined){
+    vm.SelectDate = new Date();
+  }
+  else {
+    vm.SelectDate= new Date(Date.parse($window.localStorage.getItem("getDateChart")));
+  }
 
-  vm.SelectDate = new Date();
   console.log(vm.SelectDate);
 
   var getDateNow = function () {
@@ -151,7 +156,8 @@ angular.module('sbAdminApp')
     console.log(vm.SelectDate);
     getDateNow();
     getDataAPI();
-    //$window.localStorage.setItem("getDateChart",vm.SelectDate) ;
+
+    $window.localStorage.setItem("getDateChart",vm.SelectDate) ;
     // $state.go('dashboard.table');
     //$state.reload();
 

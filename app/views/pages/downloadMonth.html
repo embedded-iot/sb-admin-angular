@@ -10,7 +10,7 @@
 					<div class="fa icon fa-folder-o" ng-mouseenter="inHover($index)" ng-mouseleave="outHover($index)" ng-class="{'fa-folder-open-o' : month.flagHover}" ng-click="selectedMonth($index)"></div>
 					<div class="row">
 						<div class="title-name">{{month.name}}</div>
-						<div class="fa fa-cloud-download"></div>
+						<div class="fa fa-cloud-download" ng-click="downloadMonthOfYear($index)"></div>
 					</div>
 				</div>
 			</div>

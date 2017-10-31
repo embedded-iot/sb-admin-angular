@@ -50,10 +50,24 @@ angular.module('sbAdminApp')
     $scope.inHover = function (index){
       $scope.listDayOfMonth[index].flagHover = true;
       // console.log('in '+index);
-    }
+    };
     $scope.outHover = function (index){
       $scope.listDayOfMonth[index].flagHover = false;
       // console.log('out '+index);
-    }
+    };
+    
+    $scope.downloadDayOfMonth = function (index) {
+      //http://127.0.0.1/projects/PHP/demo3/index.php?Day=29&Month=10&UseName=Q&Year=2017&action=downloadDayOfMonth&code=123
+      var params = {
+        UseName : $scope.UseName,
+        code : $scope.code,
+        Year : $scope.year,
+        Month : $scope.month,
+        Day :  $scope.listDayOfMonth[index].name,
+        action : 'downloadDayOfMonth'
+      };
+      var params = "?UseName=" +$scope.UseName + "&code=" + $scope.code+"&Year=" + $scope.year+ "&Month="+$scope.month+"&Day="+$scope.listDayOfMonth[index].name+"&action=downloadDayOfMonth";
+      httpService.newTabBrowser(params);
+    };
     
 }]);

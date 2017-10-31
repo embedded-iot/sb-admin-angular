@@ -19,10 +19,12 @@ angular.module('sbAdminApp',["ngTable"])
       $scope.year = vm.SelectDate.getFullYear();
       $scope.month = vm.SelectDate.getMonth()+1;
       $scope.day = vm.SelectDate.getDate();
+      vm.DateNow = $scope.day+'-'+$scope.month + '-'+$scope.year;
     };
 
     vm.chartOptions = {};
     var data = [];
+
     var getDataAPI = function () {
       //http://127.0.0.1/projects/PHP/demo3/index.php?UseName=Q&code=123&Year=2017&Month=10&Day=17&action=getDataOfFile
       console.log("home getDataAPI");
@@ -59,7 +61,7 @@ angular.module('sbAdminApp',["ngTable"])
           console.log(vm.listRadiant);
         }
 
-        vm.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data});
+        vm.tableParams = new NgTableParams({ count: 5}, { counts: [12, 25, 50], dataset: data});
         console.log(data);
 
         vm.chartOptions = {
@@ -114,7 +116,7 @@ angular.module('sbAdminApp',["ngTable"])
           }]
         };
         Highcharts.chart('container',  vm.chartOptions);
-
+        vm.isNoData = data.length;
       }, function (status) {
         console.log(status);
       });

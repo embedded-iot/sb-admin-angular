@@ -61,4 +61,11 @@ angular.module('sbAdminApp')
     $scope.selectedMonth = function (index){
       $state.go('dashboard.downloadDay', { year : $scope.selectedYear , month : $scope.listMonthOfYear[index].name})
     }
+    //http://127.0.0.1/projects/PHP/demo3/index.php?Month=10&UseName=Q&Year=2017&action=downloadMonthOfYear&code=123
+    $scope.downloadMonthOfYear = function (index) {
+      //http://127.0.0.1/projects/PHP/demo3/index.php?Day=29&Month=10&UseName=Q&Year=2017&action=downloadMonthOfYear&code=123
+
+      var params = "?UseName=" +$scope.UseName + "&code=" + $scope.code+"&Year=" + $scope.selectedYear+ "&Month="+$scope.listMonthOfYear[index].name+"&action=downloadMonthOfYear";
+      httpService.newTabBrowser(params);
+    };
 }]);
