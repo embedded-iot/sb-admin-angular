@@ -129,6 +129,12 @@ angular.module('sbAdminApp',["ngTable"])
       //$state.reload();
       $state.go($state.current, {}, {reload: true});
     }*/
-
-
+    $scope.Timer = setInterval(function () {
+      getDateNow();
+      getDataAPI();
+    }, 4000);
+    $scope.$on("$destroy",function(){
+      console.log("destroy home");
+      clearInterval($scope.Timer)
+    });
   }]);

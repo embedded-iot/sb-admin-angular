@@ -28,10 +28,10 @@ angular.module('sbAdminApp')
           {
             method: "GET",
             url: URL_SERVER,
-            params : params,
+            params : params/*,
             headers : {
               'Access-Control-Allow-Origin': '*'
-            }
+            }*/
           })
           .success(function (data, status, headers, config) {
             deferred.resolve(data);

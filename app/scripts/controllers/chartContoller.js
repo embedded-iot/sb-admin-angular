@@ -143,9 +143,6 @@ angular.module('sbAdminApp')
       console.log(status);
     });
 
-
-
-
   };
 
 

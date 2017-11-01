@@ -86,6 +86,7 @@ angular
             return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
+                'scripts/directives/dashboard/stats/stats.js',
                 'scripts/services/httpService.js',
                 'scripts/directives/timeline/timeline.js',
                 'scripts/directives/notifications/notifications.js',
@@ -100,6 +101,7 @@ angular
                 'bower_components/angular-chart.js/dist/angular-chart.css',
                 'code/highcharts.js',
                 'code/modules/exporting.js',
+                'scripts/controllers/main.js'
               ]
             }),
             $ocLazyLoad.load({
@@ -181,13 +183,15 @@ angular
               files:[
                 'scripts/directives/chart/chartline.js',
                 'scripts/directives/datetime/rm-datepicker.js',
+                'scripts/directives/datetime/rm-datepicker.js',
                 'bower_components/angular-chart.js/dist/angular-chart.min.js',
                 'bower_components/angular-chart.js/dist/angular-chart.css',
                 'code/highcharts.js',
                 'code/modules/exporting.js',
                 'scripts/services/httpService.js',
-                'scripts/services/shareData.js'
+                'scripts/services/shareData.js',
                 // 'scripts/directives/chart/chartline.js',
+                'scripts/controllers/chartContoller.js'
 
               ]
             }),
@@ -209,10 +213,12 @@ angular
               name:'sbAdminApp',
               files:[
                 'scripts/directives/datetime/rm-datepicker.js',
+                'scripts/directives/datetime/rm-datepicker.js',
                 'code/table/ng-table.css',
                 'code/table/ng-table.js',
                 'scripts/services/httpService.js',
-                'scripts/services/shareData.js'
+                'scripts/services/shareData.js',
+                'scripts/controllers/tableController.js'
               ]
             }),
             $ocLazyLoad.load({

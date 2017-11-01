@@ -16,12 +16,15 @@ angular.module('sbAdminApp')
 				// 	UseName: '=',
 				// 	code : '='
 				// },
-				controller: ['$scope','shareData','$window', function ($scope, shareData, $window) {
+				controller: ['$scope','shareData','$window','$state', function ($scope, shareData, $window, $state) {
           // $scope.UseName = shareData.getUseName();
           // $scope.code = shareData.getcode();
           $scope.UseName = $window.localStorage['UseName'];
           $scope.code = $window.localStorage['code'];
-
+					$scope.logout = function () {
+            $window.localStorage.clear();
+            $state.go("login");
+          };
 				}]
     	};
 	}]);
