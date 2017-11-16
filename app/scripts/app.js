@@ -21,7 +21,7 @@ angular
       events:true,
     });
 
-    $urlRouterProvider.otherwise('/dashboard/home');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
       .state('dashboard', {
@@ -102,26 +102,47 @@ angular
         url:'/blank'
     })
       .state('login',{
+        url:'/login',
+        controller:'LoginCtrl',
         templateUrl:'views/pages/login.html',
-        url:'/login'
-    })
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'scripts/controllers/httpService.js',
+                'scripts/controllers/loginController.js'
+              ]
+            })
+          }
+        }
+      })
       .state('dashboard.chart',{
-        templateUrl:'views/chart.html',
         url:'/chart',
         controller:'ChartCtrl',
+        controllerAs: 'vm',
+        templateUrl:'views/chart.html',
         resolve: {
           loadMyFile:function($ocLazyLoad) {
             return $ocLazyLoad.load({
-              name:'chart.js',
+              name:'sbAdminApp',
               files:[
+                'bower_components/highcharts/highcharts.js',
+                'bower_components/highcharts/modules/exporting.js',
+                'scripts/directives/datetime/rm-datepicker.js',
+                'scripts/directives/datetime/rm-datepicker.css',
+                'bower_components/angular-datepicker/dist/angular-datepicker.js',
+                'bower_components/angular-datepicker/dist/angular-datepicker.css',
                 'bower_components/angular-chart.js/dist/angular-chart.min.js',
-                'bower_components/angular-chart.js/dist/angular-chart.css'
+                'bower_components/angular-chart.js/dist/angular-chart.css',
+                'scripts/controllers/httpService.js',
+                'scripts/controllers/chartContoller.js'
               ]
-            }),
+            })/*,
             $ocLazyLoad.load({
                 name:'sbAdminApp',
                 files:['scripts/controllers/chartContoller.js']
-            })
+            })*/
           }
         }
     })
