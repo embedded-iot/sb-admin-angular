@@ -82,28 +82,17 @@ angular.module('sbAdminApp')
     $scope.code = $window.localStorage['code'];
 
     var vm = this;
-
-    $scope.today = function() {
-      if ($scope.today) {
-        $scope.day = new Date();
-      }
-    };
-    $scope.options = {
-      minDate: new Date(),
-      showWeeks: true
-    };
-
-    var dateNow = new Date();
+    // var dateNow = new Date();
     vm.data = [];
-    vm.oDate2 = dateNow;
-
-    if ($window.localStorage["getDateChart"] === undefined){
-      vm.SelectDate = new Date();
-    }
-    else {
-      vm.SelectDate= new Date(Date.parse($window.localStorage.getItem("getDateChart")));
-    }
-
+    // vm.oDate2 = dateNow;
+    //
+    // if ($window.localStorage["getDateChart"] === undefined){
+    //   vm.SelectDate = new Date();
+    // }
+    // else {
+    //   vm.SelectDate= new Date(Date.parse($window.localStorage.getItem("getDateChart")));
+    // }
+    vm.SelectDate = new Date();
     console.log(vm.SelectDate);
 
     var getDateNow = function () {

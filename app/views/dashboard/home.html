@@ -1,11 +1,12 @@
+<!--
 <div>
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Dashboard</h1>
         </div>
-        <!-- /.col-lg-12 -->
+        &lt;!&ndash; /.col-lg-12 &ndash;&gt;
     </div>
-    <!-- /.row -->
+    &lt;!&ndash; /.row &ndash;&gt;
     <div class="row">
         
         <stats number="6" comments="New comments!" colour="primary" type="comments"></stats>
@@ -15,35 +16,125 @@
 
     </div>
     
-    <!-- /.panel -->
+    &lt;!&ndash; /.panel &ndash;&gt;
     <div class="row">
         <div class="col-lg-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
                 </div>
-                <!-- /.panel-heading -->
+                &lt;!&ndash; /.panel-heading &ndash;&gt;
                 <timeline></timeline>
-                <!-- /.panel-body -->
+                &lt;!&ndash; /.panel-body &ndash;&gt;
             </div>
-            <!-- /.panel -->
+            &lt;!&ndash; /.panel &ndash;&gt;
         </div>
-        <!-- /.col-lg-8 -->
+        &lt;!&ndash; /.col-lg-8 &ndash;&gt;
         <div class="col-lg-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-bell fa-fw"></i> Notifications Panel
                 </div>
-                <!-- /.panel-heading -->
+                &lt;!&ndash; /.panel-heading &ndash;&gt;
                 <notifications></notifications> 
-                <!-- /.panel-body -->
+                &lt;!&ndash; /.panel-body &ndash;&gt;
             </div>
-            <!-- /.panel -->
+            &lt;!&ndash; /.panel &ndash;&gt;
 
             <chat></chat>
-             <!-- /.panel .chat-panel -->
+             &lt;!&ndash; /.panel .chat-panel &ndash;&gt;
         </div>
-        <!-- /.col-lg-4 -->
+        &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+    </div>
+    &lt;!&ndash; /.row &ndash;&gt;
+</div>
+-->
+<div >
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Dashboard</h1>
+        </div>
+        <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
+    <div class="row" >
+
+        <stats number="{{(vm.listTime.length > 0) ? vm.listTime[vm.listTime.length-1].substr(0, vm.listTime[vm.listTime.length-1].lastIndexOf('-')) : 0}}" comments="{{vm.listDate[vm.listDate.length-1] || vm.DateNow}}" title = "Today" colour="primary" type="comments"></stats>
+        <stats number="{{(vm.listTemperature.length > 0) ? vm.listTemperature[vm.listTemperature.length-1] : 0 }}" comments="*C" title = "Temperature" colour="primary" type="user"></stats>
+        <stats number="{{(vm.listRadiant.length > 0) ? vm.listRadiant[vm.listRadiant.length-1] : 0 }}" comments="W/m2" title = "Radiant" colour="yellow" type="shopping-cart"></stats>
+        <stats number="0" comments="KW/h!" title = "Power" colour="red" type="support"></stats>
+
+    </div>
+
+    <div class="row" ng-hide="vm.isNoData == 0">
+        <hr>
+        <div class="col-lg-12">
+            <div class="panel-body table-panel">
+                <div class="dataTable_wrapper">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control" placeholder="Search ........" ng-model="vm.searchKeyword">
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <td>
+                                <a ng-click="vm.sortType = 'Date'; vm.sortReverse = !vm.sortReverse">
+                                    Date
+                                    <span ng-show="vm.sortType == 'Date' && !vm.sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="vm.sortType == 'Date' && vm.sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a  ng-click="vm.sortType = 'Time'; vm.sortReverse = !vm.sortReverse">
+                                    Time
+                                    <span ng-show="vm.sortType == 'Time' && !vm.sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="vm.sortType == 'Time' && vm.sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a  ng-click="vm.sortType = 'Temperature'; vm.sortReverse = !vm.sortReverse">
+                                    Temperature
+                                    <span ng-show="vm.sortType == 'Temperature' && !vm.sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="vm.sortType == 'Temperature' && vm.sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a  ng-click="vm.sortType = 'Radiant'; vm.sortReverse = !vm.sortReverse">
+                                    Radiant
+                                    <span ng-show="vm.sortType == 'Radiant' && !vm.sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="vm.sortType == 'Radiant' && vm.sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </td>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="item in vm.data | orderBy:vm.sortType:vm.sortReverse | filter:vm.searchKeyword">
+                            <td>{{ item.Date }}</td>
+                            <td>{{ item.Time }}</td>
+                            <td>{{ item.Temperature }}</td>
+                            <td>{{ item.Radiant }}</td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row" ng-hide="vm.isNoData == 0">
+        <hr>
+        <div class="col-lg-12" >
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
 </div>
+

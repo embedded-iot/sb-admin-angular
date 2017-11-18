@@ -12,16 +12,16 @@ angular
     'oc.lazyLoad',
     'ui.router',
     'ui.bootstrap',
-    'angular-loading-bar',
+    'angular-loading-bar'
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
     $ocLazyLoadProvider.config({
       debug:false,
-      events:true,
+      events:true
     });
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/dashboard/home');
 
     $stateProvider
       .state('dashboard', {
@@ -37,6 +37,9 @@ angular
                     'scripts/directives/header/header-notification/header-notification.js',
                     'scripts/directives/sidebar/sidebar.js',
                     'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
+                    // 'scripts/directives/datetime/rm-datepicker.js',
+                    // 'scripts/directives/datetime/rm-datepicker.css',
+                    //   'scripts/controllers/httpService.js'
                     ]
                 }),
                 $ocLazyLoad.load(
@@ -50,22 +53,22 @@ angular
                 {
                   name:'ngAnimate',
                   files:['bower_components/angular-animate/angular-animate.js']
-                })
-                $ocLazyLoad.load(
+                }),
+                /*$ocLazyLoad.load(
                 {
                   name:'ngCookies',
                   files:['bower_components/angular-cookies/angular-cookies.js']
-                })
+                }),*/
                 $ocLazyLoad.load(
                 {
                   name:'ngResource',
                   files:['bower_components/angular-resource/angular-resource.js']
-                })
+                }),
                 $ocLazyLoad.load(
                 {
                   name:'ngSanitize',
                   files:['bower_components/angular-sanitize/angular-sanitize.js']
-                })
+                }),
                 $ocLazyLoad.load(
                 {
                   name:'ngTouch',
@@ -77,19 +80,36 @@ angular
       .state('dashboard.home',{
         url:'/home',
         controller: 'MainCtrl',
+        controllerAs : 'vm',
         templateUrl:'views/dashboard/home.html',
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
-              'scripts/controllers/main.js',
-              'scripts/directives/timeline/timeline.js',
-              'scripts/directives/notifications/notifications.js',
-              'scripts/directives/chat/chat.js',
-              'scripts/directives/dashboard/stats/stats.js'
+                /*'scripts/directives/header/header.js',
+                'scripts/directives/header/header-notification/header-notification.js',
+                'scripts/directives/sidebar/sidebar.js',
+                'scripts/directives/sidebar/sidebar-search/sidebar-search.js',*/
+                'scripts/directives/dashboard/stats/stats.js',
+
+                // 'scripts/directives/timeline/timeline.js',
+                // 'scripts/directives/notifications/notifications.js',
+                // 'scripts/directives/chat/chat.js',
+                // 'bower_components/angular-chart.js/dist/angular-chart.min.js',
+                // 'bower_components/angular-chart.js/dist/angular-chart.css',
+
+                'bower_components/highcharts/highcharts.js',
+                'bower_components/highcharts/modules/exporting.js',
+                'scripts/controllers/httpService.js',
+                'scripts/controllers/main.js'
+                // 'scripts/directives/timeline/timeline.js',
+                // 'scripts/directives/notifications/notifications.js',
+                // 'scripts/directives/chat/chat.js',
+
               ]
-            })
+
+            });
           }
         }
       })
@@ -117,6 +137,55 @@ angular
           }
         }
       })
+      .state('dashboard.downloadYear',{
+        url:'/downloadYear',
+        controller: 'downloadYearCtrl',
+        controllerAs : 'vm',
+        templateUrl:'views/download/downloadYear.html',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'scripts/controllers/httpService.js',
+                'scripts/controllers/downloadYear.js'
+              ]
+            })
+          }
+        }
+      })
+      .state('dashboard.downloadMonth',{
+        url:'/downloadMonth',
+        controller: 'downloadMonthCtrl',
+        templateUrl:'views/download/downloadMonth.html',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'scripts/controllers/httpService.js',
+                'scripts/controllers/downloadMonth.js'
+              ]
+            })
+          }
+        }
+      })
+      .state('dashboard.downloadDay',{
+        url:'/downloadDay',
+        controller: 'downloadDayCtrl',
+        templateUrl:'views/download/downloadDay.html',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'scripts/controllers/httpService.js',
+                'scripts/controllers/downloadDay.js'
+              ]
+            })
+          }
+        }
+      })
       .state('dashboard.chart',{
         url:'/chart',
         controller:'ChartCtrl',
@@ -127,14 +196,15 @@ angular
             return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
-                'bower_components/highcharts/highcharts.js',
-                'bower_components/highcharts/modules/exporting.js',
                 'scripts/directives/datetime/rm-datepicker.js',
                 'scripts/directives/datetime/rm-datepicker.css',
-                'bower_components/angular-datepicker/dist/angular-datepicker.js',
-                'bower_components/angular-datepicker/dist/angular-datepicker.css',
-                'bower_components/angular-chart.js/dist/angular-chart.min.js',
-                'bower_components/angular-chart.js/dist/angular-chart.css',
+                // 'bower_components/angular-datepicker/dist/angular-datepicker.js',
+                // 'bower_components/angular-datepicker/dist/angular-datepicker.css',
+                // 'bower_components/angular-chart.js/dist/angular-chart.min.js',
+                // 'bower_components/angular-chart.js/dist/angular-chart.css',
+                // 'bower_components/highcharts/highstock.js.map',
+                'bower_components/highcharts/highcharts.js',
+                'bower_components/highcharts/modules/exporting.js',
                 'scripts/controllers/httpService.js',
                 'scripts/controllers/chartContoller.js'
               ]
@@ -147,8 +217,30 @@ angular
         }
     })
       .state('dashboard.table',{
+        url:'/table',
+        controller:'ngTableCtrl',
+        controllerAs: 'vm',
         templateUrl:'views/table.html',
-        url:'/table'
+        resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'scripts/directives/header/header.js',
+                'scripts/directives/sidebar/sidebar.js',
+                'views/dashboard/main.html',
+
+                'scripts/directives/datetime/rm-datepicker.js',
+                'scripts/directives/datetime/rm-datepicker.css',
+                // 'bower_components/table/ng-table.js',
+                // 'bower_components/table/ng-table.css',
+
+                'scripts/controllers/httpService.js',
+                'scripts/controllers/tableController.js'
+              ]
+            })
+          }
+        }
     })
       .state('dashboard.panels-wells',{
           templateUrl:'views/ui-elements/panels-wells.html',

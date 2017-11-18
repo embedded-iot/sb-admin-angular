@@ -8,7 +8,7 @@
  */
 
 angular.module('sbAdminApp')
-  .factory('httpService',function($http, $q) {
+  .service('httpService',function($http, $q) {
 
     var URL_SERVER = 'http://mbell.vn/dist/API/index.php';
     // var all, odds = [];
@@ -21,28 +21,31 @@ angular.module('sbAdminApp')
     // return {
     //   getData: getData
     // };
-    return {
-      getData: function (params) {
-        var deferred = $q.defer();
-        $http(
-          {
-            method: "GET",
-            url: URL_SERVER,
-            params : params/*,
+    var getData = function (params) {
+      var deferred = $q.defer();
+      $http(
+        {
+          method: "GET",
+          url: URL_SERVER,
+          params : params/*,
             headers : {
               'Access-Control-Allow-Origin': '*'
             }*/
-          })
-          .success(function (data, status, headers, config) {
-            deferred.resolve(data);
-          }).error(function (data, status, headers, config) {
-          deferred.reject(status);
-        });
-        return deferred.promise;
-      },
-      newTabBrowser: function (params) {
-        var url = URL_SERVER + params;
-        window.open(url, "_blank");
-      }
-    }
+        })
+        .success(function (data, status, headers, config) {
+          deferred.resolve(data);
+        }).error(function (data, status, headers, config) {
+        deferred.reject(status);
+      });
+      return deferred.promise;
+    };
+    var newTabBrowser = function (params) {
+      var url = URL_SERVER + params;
+      window.open(url, "_blank");
+    };
+    var obj = {
+      getData : getData,
+      newTabBrowser : newTabBrowser
+    };
+    return obj;
   });

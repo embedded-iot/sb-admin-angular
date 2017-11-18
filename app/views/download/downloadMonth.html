@@ -1,0 +1,46 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12 page-header-wrapper">
+			<h1 class="col-lg-8 page-header">Download {{selectedYear}}</h1>
+			<div class="col-lg-4 input-group custom-search-form">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button" ng-click="backYearOfUse()">
+						<i class="fa fa-reply-all"></i>
+						Back
+					</button>
+				</span>
+			</div>
+		</div>
+		<!-- /.col-lg-12 -->
+		<div class="col-lg-12">
+			<div class="col-lg-2" ng-repeat="month in listMonthOfYear">
+				<div class="folder-item-wrapper">
+					<div class="fa icon fa-folder-o" ng-mouseenter="inHover($index)" ng-mouseleave="outHover($index)" ng-class="{'fa-folder-open-o' : month.flagHover}" ng-click="selectedMonth($index)"></div>
+					<div class="row">
+						<div class="title-name">{{month.name}}</div>
+						<div class="fa fa-cloud-download" ng-click="downloadMonthOfYear($index)"></div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-lg-2">
+				<div class="folder-item-wrapper">
+					<div class="fa icon fa-folder-o" ng-mouseenter="hover = true" ng-mouseleave="hover=false" ng-class="{'fa-folder-open-o' : hover}"></div>
+					<div class="row">
+						<div class="title-name">June</div>
+						<div class="fa fa-cloud-download"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2">
+				<div class="folder-item-wrapper">
+					<div class="fa icon fa-folder-o"></div>
+					<div class="row">
+						<div class="title-name">June</div>
+						<div class="fa fa-cloud-download"></div>
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	<!-- /.row -->
+</div>

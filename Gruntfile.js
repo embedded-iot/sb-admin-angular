@@ -319,13 +319,13 @@ module.exports = function (grunt) {
           dest:'<%= yeoman.dist %>/bower_components',
           src:['**']
         } ,
-        {
+        /*{
 
           expand:true,
           cwd:'API',
           dest:'<%= yeoman.dist %>/API',
           src:['**']
-        } ,
+        } ,*/
         {
           expand: true,
           cwd: '.tmp/images',
