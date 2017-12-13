@@ -7,7 +7,7 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-  .controller('downloadYearCtrl',['$scope','httpService', '$window', '$state', function($scope, httpService, $window , $state) {
+  .controller('downloadYearCtrl',['$scope','httpService', '$window', '$state', '$element', function($scope, httpService, $window , $state, $element) {
 
     var vm = this;
     vm.UseName = $window.localStorage['UseName'];
@@ -28,6 +28,10 @@ angular.module('sbAdminApp')
             vm.listYearOfUse.push({name: items[index] , flagHover: false})
           }
         }
+
+        //scope.$apply();
+        //$window.location.reload();
+        //$state.reload();
       }, function (status) {
         console.log(status);
       });
@@ -42,8 +46,15 @@ angular.module('sbAdminApp')
       vm.listYearOfUse[index].flagHover = false;
       // console.log('out '+index);
     };
-    vm.selectedYear = function (item){
+    vm.clickYear = function (item){
+      console.log(item);
       $window.localStorage['downloadYear'] = item.name;
       $state.go('dashboard.downloadMonth');
     };
+
+    $scope.$on("$destroy",function(){
+      console.log("destroy downloadYear");
+      $element.remove();
+    });
+
 }]);

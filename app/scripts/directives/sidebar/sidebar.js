@@ -10,11 +10,11 @@
 angular.module('sbAdminApp')
   .directive('sidebar',['$location',function() {
     return {
-      templateUrl:'scripts/directives/sidebar/sidebar.html',
       restrict: 'E',
       replace: true,
       scope: {
       },
+      templateUrl:'scripts/directives/sidebar/sidebar.html',
       controller:function($scope){
         $scope.selectedMenu = 'dashboard';
         $scope.collapseVar = 0;

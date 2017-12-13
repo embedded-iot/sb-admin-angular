@@ -6,8 +6,8 @@
 		<!-- /.col-lg-12 -->
 		<div class="col-lg-12">
 			<div class="col-lg-2" ng-repeat="year in vm.listYearOfUse">
-				<div class="folder-item-wrapper">
-					<div class="fa icon fa-folder-o" ng-mouseenter="vm.inHover($index)" ng-mouseleave="vm.outHover($index)" ng-class="{'fa-folder-open-o' : year.flagHover}" ng-click="vm.selectedYear(year)"></div>
+				<div class="folder-item-wrapper" ng-click="vm.clickYear(year)">
+					<div class="fa icon fa-folder-o" ng-mouseenter="vm.inHover($index)" ng-mouseleave="vm.outHover($index)" ng-class="{'fa-folder-open-o' : year.flagHover}"></div>
 					<div class="row">
 						<div class="title-name">{{year.name}}</div>
 						<!--<div class="fa fa-cloud-download" ng-click="downloadyearOfYear($index)"></div>-->

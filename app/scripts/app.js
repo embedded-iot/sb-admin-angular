@@ -31,15 +31,16 @@ angular
             loadMyDirectives:function($ocLazyLoad){
                 return $ocLazyLoad.load(
                 {
-                    name:'sbAdminApp',
+                    name:'myDirective',
                     files:[
-                    'scripts/directives/header/header.js',
-                    'scripts/directives/header/header-notification/header-notification.js',
-                    'scripts/directives/sidebar/sidebar.js',
-                    'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
-                    // 'scripts/directives/datetime/rm-datepicker.js',
-                    // 'scripts/directives/datetime/rm-datepicker.css',
-                    //   'scripts/controllers/httpService.js'
+                      'scripts/directives/google-maps/google-maps.js',
+                      'scripts/directives/header/header.js',
+                      'scripts/directives/header/header-notification/header-notification.js',
+                      'scripts/directives/sidebar/sidebar.js'
+                      //'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
+                      // 'scripts/directives/datetime/rm-datepicker.js',
+                      // 'scripts/directives/datetime/rm-datepicker.css',
+                      //   'scripts/controllers/httpService.js'
                     ]
                 }),
                 $ocLazyLoad.load(
@@ -54,11 +55,11 @@ angular
                   name:'ngAnimate',
                   files:['bower_components/angular-animate/angular-animate.js']
                 }),
-                /*$ocLazyLoad.load(
+                $ocLazyLoad.load(
                 {
                   name:'ngCookies',
                   files:['bower_components/angular-cookies/angular-cookies.js']
-                }),*/
+                }),
                 $ocLazyLoad.load(
                 {
                   name:'ngResource',
@@ -75,7 +76,8 @@ angular
                   files:['bower_components/angular-touch/angular-touch.js']
                 })
             }
-        }
+        },
+
     })
       .state('dashboard.home',{
         url:'/home',
@@ -108,7 +110,6 @@ angular
                 // 'scripts/directives/chat/chat.js',
 
               ]
-
             });
           }
         }
@@ -124,6 +125,7 @@ angular
       .state('login',{
         url:'/login',
         controller:'LoginCtrl',
+        controllerAs : 'vm',
         templateUrl:'views/pages/login.html',
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
@@ -186,6 +188,23 @@ angular
           }
         }
       })
+      .state('dashboard.googleMaps',{
+        url:'/googleMaps',
+        controller: 'googleMapsCtrl',
+        templateUrl:'views/maps/googleMaps.html',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'scripts/controllers/httpService.js',
+                'scripts/directives/google-maps/google-maps.js',
+                'scripts/controllers/mapsController.js'
+              ]
+            })
+          }
+        }
+      })
       .state('dashboard.chart',{
         url:'/chart',
         controller:'ChartCtrl',
@@ -215,6 +234,7 @@ angular
             })*/
           }
         }
+
     })
       .state('dashboard.table',{
         url:'/table',
@@ -226,9 +246,9 @@ angular
             return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
-                'scripts/directives/header/header.js',
-                'scripts/directives/sidebar/sidebar.js',
-                'views/dashboard/main.html',
+                // 'scripts/directives/header/header.js',
+                // 'scripts/directives/sidebar/sidebar.js',
+                // 'views/dashboard/main.html',
 
                 'scripts/directives/datetime/rm-datepicker.js',
                 'scripts/directives/datetime/rm-datepicker.css',

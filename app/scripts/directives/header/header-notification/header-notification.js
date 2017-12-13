@@ -9,9 +9,10 @@
 angular.module('sbAdminApp')
 	.directive('headerNotification',function(){
 		return {
-        templateUrl:'scripts/directives/header/header-notification/header-notification.html',
         restrict: 'E',
         replace: true,
+      	scope: {},
+      	templateUrl:'scripts/directives/header/header-notification/header-notification.html',
 				controller: ['$scope','$window','$state', function ($scope, $window, $state) {
 					// $scope.UseName = shareData.getUseName();
 					// $scope.code = shareData.getcode();

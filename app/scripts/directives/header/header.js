@@ -9,9 +9,10 @@
 angular.module('sbAdminApp')
 	.directive('header',function(){
 		return {
+      	restrict: 'E',
+				scope: {},
         templateUrl:'scripts/directives/header/header.html',
-        restrict: 'E',
-        replace: true,
+        replace: true
     	}
 	});
 
