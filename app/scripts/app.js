@@ -17,11 +17,11 @@ angular
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
     $ocLazyLoadProvider.config({
-      debug:false,
+      debug:true,
       events:true
     });
 
-    $urlRouterProvider.otherwise('/dashboard/home');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
       .state('dashboard', {
@@ -31,7 +31,7 @@ angular
             loadMyDirectives:function($ocLazyLoad){
                 return $ocLazyLoad.load(
                 {
-                    name:'myDirective',
+                    name:'sbAdminApp',
                     files:[
                       'scripts/directives/google-maps/google-maps.js',
                       'scripts/directives/header/header.js',
@@ -126,6 +126,7 @@ angular
         url:'/login',
         controller:'LoginCtrl',
         controllerAs : 'vm',
+        replace: true,
         templateUrl:'views/pages/login.html',
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
