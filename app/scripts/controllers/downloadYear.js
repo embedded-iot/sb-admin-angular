@@ -12,6 +12,8 @@ angular.module('sbAdminApp')
     var vm = this;
     vm.UseName = $window.localStorage['UseName'];
     vm.code = $window.localStorage['code'];
+    vm.Model = $window.localStorage['Model'];
+
     vm.listYearOfUse = [];
     vm.httpService = httpService;
     var getListYear = function () {
@@ -21,6 +23,9 @@ angular.module('sbAdminApp')
         code : vm.code,
         action : 'getYearOfUser'
       };
+      if (vm.Model !== null && vm.Model !== "") {
+        params.Model = vm.Model;
+      }
       vm.httpService.getData(params).then(function (items) {
         //angular.copy(items, vm.listYearOfUse);
         if (items.length > 0) {

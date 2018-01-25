@@ -11,7 +11,7 @@ angular.module('sbAdminApp')
     var vm = this;
     vm.UseName = $window.localStorage['UseName'];
     vm.code = $window.localStorage['code'];
-
+    vm.Model = $window.localStorage['Model'];
     
     var dateNow = new Date();
     vm.data = [];
@@ -44,11 +44,17 @@ angular.module('sbAdminApp')
         Day : (vm.day < 10 ? ('0'+vm.day) : vm.day),
         action : 'getDataOfFile'
       };
+      if (vm.Model !== null && vm.Model !== "") {
+        params.Model = vm.Model;
+      }
       vm.httpService.getData(params).then(function (items) {
-
+        vm.data = [];
         if (items.length > 0){
+          for (var i = items.length - 1; i >= 0; i--) {
+            vm.data.push(items[i]);
+          }
 
-          angular.copy(items, vm.data);
+          // angular.copy(items, vm.data);
         }
         vm.isNoData = vm.data.length;
         console.log(vm.data);
@@ -69,6 +75,9 @@ angular.module('sbAdminApp')
     vm.sortType     = 'Date'; // set the default sort type
     vm.sortReverse  = false;  // set the default sort order
     vm.searchKeyword= '';     // set the default search/filter term
-
+    vm.clickSort = function (key) {
+      vm.sortType = key;
+      vm.sortReverse = !vm.sortReverse;
+    }
 
 }]);

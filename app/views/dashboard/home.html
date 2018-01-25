@@ -57,13 +57,16 @@
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
-    <div class="row" >
+    <div class="row" ng-if="vm.isNoData == 0">
+        <stats number="No data" comments="No data" title = "No data" colour="primary" type="support"></stats>
+    </div>
+    <div class="row" ng-if="vm.isNoData > 0">
 
-        <stats number="{{(vm.listTime.length > 0) ? vm.listTime[vm.listTime.length-1].substr(0, vm.listTime[vm.listTime.length-1].lastIndexOf('-')) : 0}}" comments="{{vm.listDate[vm.listDate.length-1] || vm.DateNow}}" title = "Today" colour="primary" type="comments"></stats>
+       <!-- <stats number="{{(vm.listTime.length > 0) ? vm.listTime[vm.listTime.length-1].substr(0, vm.listTime[vm.listTime.length-1].lastIndexOf('-')) : 0}}" comments="{{vm.listDate[vm.listDate.length-1] || vm.DateNow}}" title = "Today" colour="primary" type="comments"></stats>
         <stats number="{{(vm.listTemperature.length > 0) ? vm.listTemperature[vm.listTemperature.length-1] : 0 }}" comments="*C" title = "Temperature" colour="primary" type="user"></stats>
         <stats number="{{(vm.listRadiant.length > 0) ? vm.listRadiant[vm.listRadiant.length-1] : 0 }}" comments="W/m2" title = "Radiant" colour="yellow" type="shopping-cart"></stats>
-        <stats number="0" comments="KW/h!" title = "Power" colour="red" type="support"></stats>
-
+        <stats number="0" comments="KW/h!" title = "Power" colour="red" type="support"></stats>-->
+        <stats ng-repeat="(key, value) in vm.data[vm.data.length - 1]" number="{{value}}" comments="{{key}}" title = "{{key}}" colour="primary" type="support"></stats>
     </div>
 
     <div class="row" ng-hide="vm.isNoData == 0">
@@ -80,7 +83,7 @@
                         </div>
                     </form>
                     <table class="table table-bordered table-striped">
-                        <thead>
+                        <!--<thead>
                         <tr>
                             <td>
                                 <a ng-click="vm.sortType = 'Date'; vm.sortReverse = !vm.sortReverse">
@@ -119,7 +122,22 @@
                             <td>{{ item.Time }}</td>
                             <td>{{ item.Temperature }}</td>
                             <td>{{ item.Radiant }}</td>
+                        </tr>-->
+                        <thead>
+                        <tr>
+                            <td ng-repeat="(key, value) in vm.data[vm.data.length - 1]">
+                                <a>
+                                    {{key}}
+                                </a>
+                            </td>
                         </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="item in vm.data | orderBy:vm.sortType:vm.sortReverse | filter:vm.searchKeyword">
+                            <td ng-repeat="(key, value) in item">{{ value }}</td>
+                        </tr>
+                        </tbody>
                         </tbody>
 
                     </table>

@@ -8,10 +8,12 @@
  */
 angular.module('sbAdminApp')
   .controller('MainCtrl', ['$scope', '$position','$timeout' ,'httpService' ,'$window',function($scope, $position,$timeout, httpService ,$window ) {
+    var vm = this;
     $scope.UseName = $window.localStorage['UseName'];
     $scope.code = $window.localStorage['code'];
+    vm.Model = $window.localStorage['Model'];
 
-    var vm = this;
+
     vm.httpService = httpService;
     vm.SelectDate = new Date();
     console.log(vm.SelectDate);
@@ -36,6 +38,9 @@ angular.module('sbAdminApp')
         Day : ($scope.day < 10 ? ('0'+$scope.day) : $scope.day),
         action : 'getDataOfFile'
       };
+      if (vm.Model !== null && vm.Model !== "") {
+        params.Model = vm.Model;
+      }
       vm.httpService.getData(params).then(function (items) {
 
         vm.listTime = [];
@@ -43,11 +48,14 @@ angular.module('sbAdminApp')
         vm.listRadiant = [];
         vm.data = [];
         if (items.length > 0){
-          angular.copy(items,vm.data);
+          angular.copy(items, vm.data);
+          /*for (var i = items.length - 1; i >= 0; i--) {
+            vm.data.push(items[i]);
+          }*/
           // console.log('Lenght = '+vm.data.length);
           // console.log(vm.data);
           // vm.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: vm.data});
-          for (var index = 0 ; index < items.length; index ++){
+          /*for (var index = 0 ; index < items.length; index ++){
             vm.listTime.push(items[index].Time);
             vm.listTemperature.push(parseFloat(items[index].Temperature));
             vm.listRadiant.push(parseFloat(items[index].Radiant));
@@ -55,7 +63,7 @@ angular.module('sbAdminApp')
           console.log(vm.listTime);
           console.log(vm.listTemperature);
           console.log(vm.listRadiant);
-          console.log("End get data");
+          console.log("End get data");*/
         }
 
         vm.chartOptions = {
@@ -125,7 +133,7 @@ angular.module('sbAdminApp')
     $scope.Timer = setInterval(function () {
       getDateNow();
       getDataAPI();
-    }, 4000);
+    }, 8000);
 
     $scope.$on("$destroy",function(){
       console.log("destroy home");

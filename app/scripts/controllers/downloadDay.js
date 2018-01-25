@@ -10,6 +10,7 @@ angular.module('sbAdminApp')
   .controller('downloadDayCtrl',['$scope','$state','$window', 'httpService', function($scope,$state, $window, httpService) {
     $scope.UseName = $window.localStorage['UseName'];
     $scope.code = $window.localStorage['code'];
+    $scope.Model = $window.localStorage['Model'];
     // $scope.monthsOfYear = shareData.monthsOfYear;
 
     if ($window.localStorage["downloadYear"] === undefined){
@@ -37,6 +38,9 @@ angular.module('sbAdminApp')
         Month : $scope.selectedMonth,
         action : 'getDayOfMonth'
       };
+      if ($scope.Model !== null && $scope.Model !== "") {
+        params.Model = $scope.Model;
+      }
       httpService.getData(params).then(function (items) {
         //angular.copy(items, $scope.listMonthOfYear);
         if (items.length > 0) {
@@ -71,7 +75,10 @@ angular.module('sbAdminApp')
         Day :  $scope.listDayOfMonth[index].name,
         action : 'downloadDayOfMonth'
       };
-      var params = "?UseName=" +$scope.UseName + "&code=" + $scope.code+"&Year=" + $scope.selectedYear+ "&Month="+$scope.selectedMonth+"&Day="+$scope.listDayOfMonth[index].name+"&action=downloadDayOfMonth";
+      var params = "UseName=" +$scope.UseName + "&code=" + $scope.code+"&Year=" + $scope.selectedYear+ "&Month="+$scope.selectedMonth+"&Day="+$scope.listDayOfMonth[index].name+"&action=downloadDayOfMonth";
+      if ($scope.Model !== null && $scope.Model !== "") {
+        params += "&Model=" + $scope.Model;
+      }
       httpService.newTabBrowser(params);
     };
     

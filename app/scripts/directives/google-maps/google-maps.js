@@ -19,6 +19,8 @@ angular.module('sbAdminApp')
         var vm = this;
         vm.UseName = $window.localStorage['UseName'];
         vm.code = $window.localStorage['code'];
+        vm.Model = $window.localStorage['Model'];
+
         vm.infoAccount = {};
         vm.httpService = httpService;
         var getInforAccount = function () {
@@ -28,6 +30,9 @@ angular.module('sbAdminApp')
             code : vm.code,
             action : 'getInforAccount'
           };
+          if (vm.Model !== null && vm.Model !== "") {
+            params.Model = vm.Model;
+          }
           vm.httpService.getData(params).then(function (items) {
             if (items !== null) {
               angular.copy(items, vm.infoAccount);
@@ -64,6 +69,9 @@ angular.module('sbAdminApp')
             Day : ($scope.day < 10 ? ('0'+$scope.day) : $scope.day),
             action : 'getCurrentData'
           };
+          if (vm.Model !== null && vm.Model !== "") {
+            params.Model = vm.Model;
+          }
           vm.httpService.getData(params).then(function (items) {
             if (items !== null) {
               console.log(items);
@@ -96,7 +104,7 @@ angular.module('sbAdminApp')
               $scope.$apply(function () {
                 getCurrentData();
               });
-            }, 4000);
+            }, 8000);
 
             listen();
           }
@@ -112,7 +120,12 @@ angular.module('sbAdminApp')
           //marker.content = '<div class="infoWindowContent">' + info.code + '</div>';
           //{"Date":"7-12-2017","Time":"0-14-2","Temperature":"22.60","Radiant":"-1.29",
           if (data !== undefined && data !== null && data.Date !== undefined){
-            marker.content = '<div class="infoWindowContent">' + 'Date:' + data.Date +'<br>' + 'Time:' + data.Time +'<br>' + 'Temperature:' + data.Temperature +'<br>' + 'Radiant:' + data.Radiant +'<br>' +'</div>';
+            marker.content = '<div class="infoWindowContent">'
+            angular.forEach(data, function(value, key) {
+              console.log(key + ': ' + value);
+              marker.content += key + ':' + value +'<br>';
+            });
+            marker.content += '</div>';
           }
           else marker.content = '<div class="infoWindowContent">No Data</div>';
           google.maps.event.addListener(marker, 'click', function(){

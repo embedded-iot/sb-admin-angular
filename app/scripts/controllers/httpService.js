@@ -10,7 +10,7 @@
 angular.module('sbAdminApp')
   .service('httpService',function($http, $q) {
 
-    var URL_SERVER = 'http://mbell.vn/dist/API/index.php';
+    var URL_SERVER = 'http://mbell.vn/QLNL/API/index.php?';
     // var all, odds = [];
     // var getData = function() {
     //   return $http.get("http://www.w3schools.com/angular/customers.php")

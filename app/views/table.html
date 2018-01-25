@@ -33,7 +33,7 @@
                         </div>
                     </form>
                     <table class="table table-bordered table-striped" ng-if="vm.data.length > 0">
-                        <thead>
+                        <!--<thead>
                         <tr>
                             <td>
                                 <a ng-click="vm.sortType = 'Date'; vm.sortReverse = !vm.sortReverse">
@@ -64,14 +64,20 @@
                                 </a>
                             </td>
                         </tr>
+                        </thead>-->
+                        <thead>
+                        <tr>
+                            <td ng-repeat="(key, value) in vm.data[vm.data.length - 1]">
+                                <a>
+                                    {{key}}
+                                </a>
+                            </td>
+                        </tr>
                         </thead>
 
                         <tbody>
                         <tr ng-repeat="item in vm.data | orderBy:vm.sortType:vm.sortReverse | filter:vm.searchKeyword">
-                            <td>{{ item.Date }}</td>
-                            <td>{{ item.Time }}</td>
-                            <td>{{ item.Temperature }}</td>
-                            <td>{{ item.Radiant }}</td>
+                            <td ng-repeat="(key, value) in item">{{ value }}</td>
                         </tr>
                         </tbody>
 
