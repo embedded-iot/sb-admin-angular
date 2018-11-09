@@ -22,6 +22,9 @@ $ git clone https://github.com/start-angular/sb-admin-angular.git
 $ sudo apt-get install npm
 $ sudo npm install -g grunt-cli
 $ sudo npm install -g bower
+
+bower install highcharts // install highcharts for bower
+
 ```
 ####3. On the command prompt run the following commands
 
@@ -38,7 +41,7 @@ $ npm start
 ```
 - a shortcut for `grunt serve:dist` to minify the files for deployment
 ```sh
-$ npm run dist 
+$ npm run dist
 ```
 
 

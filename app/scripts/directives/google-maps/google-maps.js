@@ -100,11 +100,11 @@ angular.module('sbAdminApp')
           if (newValue !== undefined && newValue !== null && newValue !== oldValue) {
             $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
             console.log($scope.map);
-            $scope.Timer = setInterval(function () {
+           /* $scope.Timer = setInterval(function () {
               $scope.$apply(function () {
                 getCurrentData();
               });
-            }, 8000);
+            }, 8000);*/
 
             listen();
           }

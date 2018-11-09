@@ -21,7 +21,7 @@ angular
       events:true
     });
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/dashboard');
 
     $stateProvider
       .state('dashboard', {
@@ -74,7 +74,7 @@ angular
                 {
                   name:'ngTouch',
                   files:['bower_components/angular-touch/angular-touch.js']
-                })
+                });
             }
         },
 
@@ -124,10 +124,9 @@ angular
     })
       .state('login',{
         url:'/login',
+        templateUrl:'views/pages/login.html',
         controller:'LoginCtrl',
         controllerAs : 'vm',
-        replace: true,
-        templateUrl:'views/pages/login.html',
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
@@ -136,15 +135,15 @@ angular
                 'scripts/controllers/httpService.js',
                 'scripts/controllers/loginController.js'
               ]
-            })
+            });
           }
         }
       })
       .state('dashboard.downloadYear',{
         url:'/downloadYear',
-        controller: 'downloadYearCtrl',
-        controllerAs : 'vm',
         templateUrl:'views/download/downloadYear.html',
+        controller: 'downloadYearCtrl as vm',
+        // controllerAs : 'vm',
         resolve: {
           loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
@@ -153,7 +152,7 @@ angular
                 'scripts/controllers/httpService.js',
                 'scripts/controllers/downloadYear.js'
               ]
-            })
+            });
           }
         }
       })
@@ -169,7 +168,7 @@ angular
                 'scripts/controllers/httpService.js',
                 'scripts/controllers/downloadMonth.js'
               ]
-            })
+            });
           }
         }
       })
@@ -185,7 +184,7 @@ angular
                 'scripts/controllers/httpService.js',
                 'scripts/controllers/downloadDay.js'
               ]
-            })
+            });
           }
         }
       })
@@ -202,7 +201,7 @@ angular
                 'scripts/directives/google-maps/google-maps.js',
                 'scripts/controllers/mapsController.js'
               ]
-            })
+            });
           }
         }
       })
@@ -228,7 +227,7 @@ angular
                 'scripts/controllers/httpService.js',
                 'scripts/controllers/chartContoller.js'
               ]
-            })/*,
+            });/*,
             $ocLazyLoad.load({
                 name:'sbAdminApp',
                 files:['scripts/controllers/chartContoller.js']
@@ -259,7 +258,7 @@ angular
                 'scripts/controllers/httpService.js',
                 'scripts/controllers/tableController.js'
               ]
-            })
+            });
           }
         }
     })
@@ -286,7 +285,7 @@ angular
       .state('dashboard.grid',{
        templateUrl:'views/ui-elements/grid.html',
        url:'/grid'
-   })
+   });
   }]);
 
     

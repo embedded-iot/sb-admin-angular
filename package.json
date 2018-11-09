@@ -6,6 +6,7 @@
     "url": "https://github.com/start-angular/sb-admin-angular"
   },
   "dependencies": {
+    "highcharts": "^6.1.4",
     "jasmine": "^2.8.0",
     "phantomjs": "^2.1.7"
   },
